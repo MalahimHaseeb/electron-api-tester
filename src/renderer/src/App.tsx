@@ -1,29 +1,35 @@
 import { useState } from 'react'
+import RequestEditor from './components/request/RequestEditor'
+import ResponseViewer from './components/response/ResponseViewer'
+
+interface ResponseState {
+  body: string
+  status: number
+  statusText: string
+  duration: number
+}
 
 function App(): React.JSX.Element {
-  const [response, setResponse] = useState<string>('')
-
-  const sendRequest = async (): Promise<void> => {
-    const result = await window.api.sendRequest({
-      method: 'GET',
-      url: 'https://jsonplaceholder.typicode.com/users/1'
-    })
-
-    setResponse(result.body)
-  }
+  const [response, setResponse] = useState<ResponseState | null>(null)
 
   return (
-    <main className="min-h-screen bg-background p-8 text-foreground">
-      <button
-        className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
-        onClick={sendRequest}
-      >
-        Send Request
-      </button>
+    <main className="flex min-h-screen flex-col bg-background text-foreground">
+      <header className="border-b bg-header px-6 py-4">
+        <h1 className="text-lg font-semibold">
+          Electron API Tester
+        </h1>
+      </header>
 
-      <pre className="mt-6 overflow-auto rounded-md border bg-code p-4">
-        {response}
-      </pre>
+      <section className="border-b p-4">
+        <RequestEditor onResponse={setResponse} />
+      </section>
+
+      <ResponseViewer
+        body={response?.body ?? ''}
+        status={response?.status}
+        statusText={response?.statusText}
+        duration={response?.duration}
+      />
     </main>
   )
 }
