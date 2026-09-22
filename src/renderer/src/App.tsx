@@ -1,52 +1,36 @@
-import Badge from "./components/ui/Badge"
-import Button from "./components/ui/Button"
-import Card from "./components/ui/Card"
-import Input from "./components/ui/Input"
-
+import { useEffect, useState } from 'react'
 
 function App(): React.JSX.Element {
+  const [appInfo, setAppInfo] = useState<{
+    name: string
+    version: string
+    platform: string
+  } | null>(null)
+
+  useEffect(() => {
+    window.api.getAppInfo().then(setAppInfo)
+  }, [])
+
   return (
     <main className="min-h-screen bg-background p-8 text-foreground">
-      <div className="mx-auto max-w-3xl space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">
-            Electron API Tester
-          </h1>
+      <div className="mx-auto max-w-3xl">
+        <h1 className="text-3xl font-bold">
+          Electron API Tester
+        </h1>
 
-          <p className="mt-2 text-muted-foreground">
-            Our own design system
-          </p>
+        <div className="mt-6 rounded-xl border bg-card p-6">
+          <h2 className="font-semibold">
+            Electron App Info
+          </h2>
+
+          {appInfo && (
+            <div className="mt-4 space-y-2 text-sm">
+              <p>Name: {appInfo.name}</p>
+              <p>Version: {appInfo.version}</p>
+              <p>Platform: {appInfo.platform}</p>
+            </div>
+          )}
         </div>
-
-        <Card className="space-y-4 p-6">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold">
-              Request
-            </h2>
-
-            <Badge variant="success">
-              Ready
-            </Badge>
-          </div>
-
-          <Input
-            placeholder="https://api.example.com/users"
-          />
-
-          <div className="flex gap-3">
-            <Button>
-              Send Request
-            </Button>
-
-            <Button variant="outline">
-              Cancel
-            </Button>
-
-            <Button variant="ghost">
-              Clear
-            </Button>
-          </div>
-        </Card>
       </div>
     </main>
   )
