@@ -37,7 +37,7 @@ Electron API Tester provides a simple desktop workspace for sending HTTP request
 
 ## Downloads
 
-Download the latest version from the GitHub Releases page.
+Download the latest version from the [GitHub Releases](https://github.com/MalahimHaseeb/electron-api-tester/releases?utm_source=chatgpt.com) page.
 
 ### Linux
 
