@@ -4,6 +4,10 @@ A lightweight desktop API testing client built with Electron, React, TypeScript,
 
 Electron API Tester provides a simple desktop workspace for sending HTTP requests, inspecting responses, and keeping request history locally.
 
+## Demo
+
+![Electron API Tester interface](public/demo.png)
+
 ## Features
 
 * GET, POST, PUT, PATCH, DELETE, and HEAD requests
@@ -33,7 +37,7 @@ Electron API Tester provides a simple desktop workspace for sending HTTP request
 
 ## Downloads
 
-Download the latest version from the [GitHub Releases](https://github.com/MalahimHaseeb/electron-api-tester/releases?utm_source=chatgpt.com) page.
+Download the latest version from the GitHub Releases page.
 
 ### Linux
 
@@ -157,7 +161,7 @@ The resulting installers are automatically attached to the GitHub Release.
 
 ## Repository
 
-[GitHub Repository](https://github.com/MalahimHaseeb/electron-api-tester?utm_source=chatgpt.com)
+GitHub Repository: `github.com/MalahimHaseeb/electron-api-tester`
 
 ## License
 
