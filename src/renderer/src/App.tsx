@@ -1,20 +1,54 @@
+import Badge from "./components/ui/Badge"
+import Button from "./components/ui/Button"
+import Card from "./components/ui/Card"
+import Input from "./components/ui/Input"
+
+
 function App(): React.JSX.Element {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950">
-      <div className="rounded-xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-        <h1 className="text-3xl font-bold text-white">
-          Electron API Tester
-        </h1>
+    <main className="min-h-screen bg-background p-8 text-foreground">
+      <div className="mx-auto max-w-3xl space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">
+            Electron API Tester
+          </h1>
 
-        <p className="mt-2 text-slate-400">
-          Electron + React + TypeScript + Tailwind
-        </p>
+          <p className="mt-2 text-muted-foreground">
+            Our own design system
+          </p>
+        </div>
 
-        <button className="mt-6 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-500">
-          Test Button
-        </button>
+        <Card className="space-y-4 p-6">
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold">
+              Request
+            </h2>
+
+            <Badge variant="success">
+              Ready
+            </Badge>
+          </div>
+
+          <Input
+            placeholder="https://api.example.com/users"
+          />
+
+          <div className="flex gap-3">
+            <Button>
+              Send Request
+            </Button>
+
+            <Button variant="outline">
+              Cancel
+            </Button>
+
+            <Button variant="ghost">
+              Clear
+            </Button>
+          </div>
+        </Card>
       </div>
-    </div>
+    </main>
   )
 }
 
