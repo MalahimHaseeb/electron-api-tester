@@ -1,53 +1,35 @@
-import Badge from "./components/ui/Badge"
-import Button from "./components/ui/Button"
-import Card from "./components/ui/Card"
-import Input from "./components/ui/Input"
+import { useState } from 'react'
+import RequestEditor from './components/request/RequestEditor'
+import ResponseViewer from './components/response/ResponseViewer'
 
+interface ResponseState {
+  body: string
+  status: number
+  statusText: string
+  duration: number
+}
 
 function App(): React.JSX.Element {
+  const [response, setResponse] = useState<ResponseState | null>(null)
+
   return (
-    <main className="min-h-screen bg-background p-8 text-foreground">
-      <div className="mx-auto max-w-3xl space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">
-            Electron API Tester
-          </h1>
+    <main className="flex min-h-screen flex-col bg-background text-foreground">
+      <header className="border-b bg-header px-6 py-4">
+        <h1 className="text-lg font-semibold">
+          Electron API Tester
+        </h1>
+      </header>
 
-          <p className="mt-2 text-muted-foreground">
-            Our own design system
-          </p>
-        </div>
+      <section className="border-b p-4">
+        <RequestEditor onResponse={setResponse} />
+      </section>
 
-        <Card className="space-y-4 p-6">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold">
-              Request
-            </h2>
-
-            <Badge variant="success">
-              Ready
-            </Badge>
-          </div>
-
-          <Input
-            placeholder="https://api.example.com/users"
-          />
-
-          <div className="flex gap-3">
-            <Button>
-              Send Request
-            </Button>
-
-            <Button variant="outline">
-              Cancel
-            </Button>
-
-            <Button variant="ghost">
-              Clear
-            </Button>
-          </div>
-        </Card>
-      </div>
+      <ResponseViewer
+        body={response?.body ?? ''}
+        status={response?.status}
+        statusText={response?.statusText}
+        duration={response?.duration}
+      />
     </main>
   )
 }
