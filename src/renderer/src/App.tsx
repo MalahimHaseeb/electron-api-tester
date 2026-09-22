@@ -1,37 +1,29 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 function App(): React.JSX.Element {
-  const [appInfo, setAppInfo] = useState<{
-    name: string
-    version: string
-    platform: string
-  } | null>(null)
+  const [response, setResponse] = useState<string>('')
 
-  useEffect(() => {
-    window.api.getAppInfo().then(setAppInfo)
-  }, [])
+  const sendRequest = async (): Promise<void> => {
+    const result = await window.api.sendRequest({
+      method: 'GET',
+      url: 'https://jsonplaceholder.typicode.com/users/1'
+    })
+
+    setResponse(result.body)
+  }
 
   return (
     <main className="min-h-screen bg-background p-8 text-foreground">
-      <div className="mx-auto max-w-3xl">
-        <h1 className="text-3xl font-bold">
-          Electron API Tester
-        </h1>
+      <button
+        className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
+        onClick={sendRequest}
+      >
+        Send Request
+      </button>
 
-        <div className="mt-6 rounded-xl border bg-card p-6">
-          <h2 className="font-semibold">
-            Electron App Info
-          </h2>
-
-          {appInfo && (
-            <div className="mt-4 space-y-2 text-sm">
-              <p>Name: {appInfo.name}</p>
-              <p>Version: {appInfo.version}</p>
-              <p>Platform: {appInfo.platform}</p>
-            </div>
-          )}
-        </div>
-      </div>
+      <pre className="mt-6 overflow-auto rounded-md border bg-code p-4">
+        {response}
+      </pre>
     </main>
   )
 }

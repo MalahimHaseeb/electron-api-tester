@@ -1,7 +1,9 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { registerAppIpc } from './ipc/app'
+import { registerRequestIpc } from './ipc/request'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -39,13 +41,8 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  ipcMain.handle('app:get-info', () => {
-    return {
-      name: app.getName(),
-      version: app.getVersion(),
-      platform: process.platform
-    }
-  })
+  registerAppIpc()
+  registerRequestIpc()
 
   createWindow()
 

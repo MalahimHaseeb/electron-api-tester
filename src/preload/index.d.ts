@@ -1,13 +1,9 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-
-interface AppInfo {
-  name: string
-  version: string
-  platform: string
-}
+import type { ApiRequest, ApiResponse, AppInfo } from '../shared/types'
 
 interface Api {
   getAppInfo: () => Promise<AppInfo>
+  sendRequest: (request: ApiRequest) => Promise<ApiResponse>
 }
 
 declare global {
