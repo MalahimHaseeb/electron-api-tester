@@ -1,8 +1,15 @@
+export interface KeyValue {
+  key: string
+  value: string
+  enabled: boolean
+}
+
 export interface ApiRequest {
   method: string
   url: string
-  headers?: Record<string, string>
-  body?: string
+  params: KeyValue[]
+  headers: KeyValue[]
+  body: string
 }
 
 export interface ApiResponse {
